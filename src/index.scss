@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap');
+
+:root {
+  --primary-color-700: #1d3557;
+  --primary-color-500: #457b9d;
+  --primary-color-200: #a8dadc;
+  --primary-color-100: #f1faee;
+
+  --secondary-color-700: #e63946;
+  --secondary-color-500: #e0525e;
+  
+  --white-color: #fff;
+  --white-black: #000;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body,
+input,
+button {
+  font-family: 'Merriweather', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+}
