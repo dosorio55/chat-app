@@ -21,6 +21,8 @@ const toastOptions = {
   theme: "dark",
 };
 
+
+
 const Register = () => {
 
   const [formState, setFormState] = useState(initialState)
