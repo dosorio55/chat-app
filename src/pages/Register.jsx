@@ -2,12 +2,24 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Register.scss';
 import circle from '../assets/circle.png'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from 'axios';
+import { registerRoute } from '../utils/APIRoutes.js';
 
 const initialState = {
   userName: '',
   password: '',
   confirmPassword: ''
-}
+};
+
+const toastOptions = {
+  position: "bottom-right",
+  autoClose: 8000,
+  pauseOnHover: true,
+  draggable: true,
+  theme: "dark",
+};
 
 const Register = () => {
 
@@ -20,9 +32,26 @@ const Register = () => {
     console.log(formState);
   }
 
-  const handleRegisterForm = (event) => {
+  const handleRegisterForm = async (event) => {
     event.preventDefault();
     console.log(formState);
+    const { userName, password, confirmPassword } = formState;
+    if (password.trim().length === 0 || userName.trim().length === 0) {
+      toast.error("You should fill all the fields", toastOptions)
+      return
+    } else if (password.length < 6) {
+      toast.error("Password should have 6 or more characters", toastOptions)
+      return
+    } else if (password !== confirmPassword) {
+      toast.error("Both passwords should be equal", toastOptions)
+      return
+    } else if (userName.length <= 4) {
+      toast.error("Password should have 6 or more characters", toastOptions)
+      return
+    }
+
+    const data = await axios.post(registerRoute,
+      { userName: userName, password: password });
     setFormState(initialState)
   }
   return (
@@ -38,6 +67,7 @@ const Register = () => {
         <button className='form__btn' type='submit'>Create User</button>
         <span>I already have an account, <Link to={'/login'}>LOGIN</Link></span>
       </form>
+      <ToastContainer />
     </div>
   )
 }

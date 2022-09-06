@@ -17,6 +17,7 @@
     gap: 2rem;
     background-color: var(--primary-color-500);
     border-radius: .5rem;
+    // min-width: 700px;
     padding: 3rem 5rem;
 
     &__img {
@@ -46,16 +47,17 @@
 
     &__btn {
         background-color: var(--secondary-color-700);
-    color: white;
-    padding: 1rem 2rem;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 0.4rem;
-    font-size: 1rem;
-    text-transform: uppercase;
-    &:hover {
-      background-color: var(--secondary-color-500);
-    }
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 0.4rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+
+        &:hover {
+            background-color: var(--secondary-color-500);
+        }
     }
 }
