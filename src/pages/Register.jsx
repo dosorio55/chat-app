@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Register.scss';
 import circle from '../assets/circle.png'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios';
-import { registerRoute } from '../utils/APIRoutes.js';
+import { loginRoute, registerRoute } from '../utils/APIRoutes.js';
 
 const initialState = {
   userName: '',
@@ -15,7 +15,7 @@ const initialState = {
 
 const toastOptions = {
   position: "bottom-right",
-  autoClose: 8000,
+  autoClose: 5000,
   pauseOnHover: true,
   draggable: true,
   theme: "dark",
@@ -23,36 +23,55 @@ const toastOptions = {
 
 const Register = () => {
 
-  const [formState, setFormState] = useState(initialState)
+  const navigate = useNavigate();
+
+  const [formState, setFormState] = useState(initialState);
+  const [loginState, setLoginState] = useState(false)
 
   const changeInputRegister = (event) => {
     const { name, value } = event.target
-    console.log(name, value);
     setFormState((prevState) => ({ ...prevState, [name]: value }))
-    console.log(formState);
   }
 
+  /* REGISTER FORM POST */
   const handleRegisterForm = async (event) => {
     event.preventDefault();
-    console.log(formState);
     const { userName, password, confirmPassword } = formState;
     if (password.trim().length === 0 || userName.trim().length === 0) {
-      toast.error("You should fill all the fields", toastOptions)
+      toast.error("You have to fill all the fields", toastOptions)
       return
     } else if (password.length < 6) {
       toast.error("Password should have 6 or more characters", toastOptions)
       return
-    } else if (password !== confirmPassword) {
+    } else if (!loginState && password !== confirmPassword) {
       toast.error("Both passwords should be equal", toastOptions)
       return
     } else if (userName.length <= 4) {
-      toast.error("Password should have 6 or more characters", toastOptions)
+      toast.error("Username should have 4 or more characters", toastOptions)
       return
     }
 
-    const data = await axios.post(registerRoute,
-      { userName: userName, password: password });
-    setFormState(initialState)
+    let data;
+
+    if (!loginState) {
+      data = await axios.post(registerRoute,
+        { userName: userName, password: password });
+    } else {
+      console.log('entra por login');
+      data = await axios.post(loginRoute,
+        { userName: userName, password: password });
+    }
+
+    if (data.data.status !== 201) {
+      toast.error(`${data.data.msg}`, toastOptions)
+      return
+    }
+
+    /*     localStorage.setItem(
+          process.env.REACT_APP_LOCALHOST_KEY,
+          JSON.stringify(data.createdUser)
+        ); */
+    // navigate("/");
   }
   return (
     <div className="formContainer">
@@ -61,11 +80,12 @@ const Register = () => {
           <img src={circle} alt="logo" />
         </div>
         <h1>MAICHAT</h1>
+        <p>{loginState ? 'Login' : 'Register'}</p>
         <input className='form__input' type="text" placeholder='Username' name='userName' value={formState.userName} onChange={changeInputRegister} />
         <input className='form__input' type="password" placeholder='password' name='password' value={formState.password} onChange={changeInputRegister} />
-        <input className='form__input' type="password" placeholder='Confirm Password' name='confirmPassword' value={formState.confirmPassword} onChange={changeInputRegister} />
+        {!loginState && <input className='form__input' type="password" placeholder='Confirm Password' name='confirmPassword' value={formState.confirmPassword} onChange={changeInputRegister} />}
         <button className='form__btn' type='submit'>Create User</button>
-        <span>I already have an account, <Link to={'/login'}>LOGIN</Link></span>
+        <span onClick={() => setLoginState(!loginState)}>{loginState ? 'Create an account' : 'I already have an account LOGIN'}</span>
       </form>
       <ToastContainer />
     </div>
