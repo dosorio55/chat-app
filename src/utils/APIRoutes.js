@@ -3,8 +3,8 @@ const HOST = "http://localhost:5000";
 
 export const registerRoute = `${HOST}/user/register`;
 export const loginRoute = `${HOST}/user/login`;
-export const satAvatarRoute = `${HOST}/user/setAvatar`;
+export const setAvatarRoute = `${HOST}/user/setAvatar`;
 
 /* avatar api */
 
-export const apiAvatar = 'https://api.multiavatar.com/45678945';
+export const apiAvatar = 'https://api.multiavatar.com';

@@ -19,7 +19,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [formState, setFormState] = useState(initialState);
-  const [loginState, setLoginState] = useState(false);
+  const [loginState, setLoginState] = useState(true);
 
   useEffect(() => {
     if(localStorage.getItem('chat-app-user')){
@@ -63,8 +63,9 @@ const Register = () => {
       toast.error(`${data.data.msg}`, toastOptions)
       return
     }
+    console.log(data);
     localStorage.setItem('chat-app-user', JSON.stringify(data.data.user));
-    navigate("/");
+    navigate("/set-avatar");
   }
   return (
     <div className="formContainer">
