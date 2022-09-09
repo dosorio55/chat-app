@@ -1,0 +1,66 @@
+.select-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3rem;
+    background-color: var(--primary-color-700);
+    height: 100vh;
+    width: 100vw;
+
+    &__title {
+        color: white;
+    }
+
+    &__avatars {
+        display: flex;
+        gap: 2rem;
+
+        &__avatar {
+            border: 0.4rem solid transparent;
+            padding: 0.4rem;
+            border-radius: 5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s ease-in-out;
+            cursor: pointer;
+
+            &--selected {
+                border: 0.4rem solid var(--secondary-color-500);
+            }
+
+            & img {
+                height: 6rem;
+                transition: 0.5s ease-in-out;
+            }
+        }
+
+    }
+
+    &__btn {
+        background-color: var(--secondary-color-700);
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 0.4rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+
+        &:hover {
+            background-color: #4e0eff;
+        }
+        
+        &:disabled{
+            background:  #fff;
+            color: #ccc;
+            cursor: no-drop;
+         }
+    }
+}
+
+.loader {
+    max-inline-size: 100%;
+}

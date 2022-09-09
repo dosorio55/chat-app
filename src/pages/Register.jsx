@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.scss';
 import circle from '../assets/circle.png'
@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios';
 import { loginRoute, registerRoute } from '../utils/APIRoutes.js';
+import { toastOptions } from '../utils/toastOpts';
 
 const initialState = {
   userName: '',
@@ -13,22 +14,18 @@ const initialState = {
   confirmPassword: ''
 };
 
-const toastOptions = {
-  position: "bottom-right",
-  autoClose: 5000,
-  pauseOnHover: true,
-  draggable: true,
-  theme: "dark",
-};
-
-//what the hell are you waiting for
-
 const Register = () => {
 
   const navigate = useNavigate();
 
   const [formState, setFormState] = useState(initialState);
-  const [loginState, setLoginState] = useState(false)
+  const [loginState, setLoginState] = useState(true);
+
+  useEffect(() => {
+    if(localStorage.getItem('chat-app-user')){
+      navigate('/')
+    }
+  }, [])
 
   const changeInputRegister = (event) => {
     const { name, value } = event.target
@@ -59,21 +56,16 @@ const Register = () => {
       data = await axios.post(registerRoute,
         { userName: userName, password: password });
     } else {
-      console.log('entra por login');
       data = await axios.post(loginRoute,
         { userName: userName, password: password });
     }
-
     if (data.data.status !== 201) {
       toast.error(`${data.data.msg}`, toastOptions)
       return
     }
-
-    /*     localStorage.setItem(
-          process.env.REACT_APP_LOCALHOST_KEY,
-          JSON.stringify(data.createdUser)
-        ); */
-    // navigate("/");
+    console.log(data);
+    localStorage.setItem('chat-app-user', JSON.stringify(data.data.user));
+    navigate("/set-avatar");
   }
   return (
     <div className="formContainer">
