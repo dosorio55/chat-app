@@ -15,6 +15,8 @@ const SetAvatar = () => {
   const [selectedAvatar, setSelectedAvatar] = useState();
   const [loading, setLoading] = useState(true)
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const getAvatar = async () => {
       setLoading(true);
@@ -29,11 +31,10 @@ const SetAvatar = () => {
       setAvatars(data);
       setLoading(false);
     }
-    getAvatar()
-  }, []);
-
-
-  const navigate = useNavigate();
+    if (localStorage.getItem('chat-app-user')) {
+      getAvatar()
+    } else { navigate("/login") }
+  }, [navigate]);
 
   const setProfilePicture = async () => {
     if (!selectedAvatar) {
@@ -47,7 +48,6 @@ const SetAvatar = () => {
         image: avatars[selectedAvatar],
       });
 
-      console.log(data);
       if (data.isSet) {
         user.isAvatarImageSet = true;
         user.avatarImage = data.image;
