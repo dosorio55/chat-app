@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { apiAvatar, setAvatarRoute } from '../utils/APIRoutes.js';
 import { Buffer } from "buffer";
 import loader from '../assets/loader.gif'
+import image from '../assets/image.png'
 import './setAvatar.scss'
 import { toast } from 'react-toastify';
 import { toastOptions } from '../utils/toastOpts.js';
@@ -31,9 +32,18 @@ const SetAvatar = () => {
       setAvatars(data);
       setLoading(false);
     }
-    if (localStorage.getItem('chat-app-user')) {
-      getAvatar()
-    } else { navigate("/login") }
+    const currentUser = JSON.parse(localStorage.getItem('chat-app-user'));
+    if (currentUser) {
+      if (!currentUser.isAvatarImageSet) {
+        getAvatar();
+      } else {
+        navigate('/chat')
+      }
+    } else {
+
+      navigate("/login")
+    }
+
   }, [navigate]);
 
   const setProfilePicture = async () => {
@@ -64,6 +74,12 @@ const SetAvatar = () => {
       <div className='select-avatar__title'>
         <h1>Select your avatar...</h1>
       </div>
+      {/* <div className='select-avatar__avatars__avatar'>
+      <img className='image' src={image} alt="avatar" />
+
+      </div> */}
+
+
       <div className='select-avatar__avatars'>
         {loading ? <img src={loader} alt="loader" />
           : avatars.map((avatar, index) =>
