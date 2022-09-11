@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Register.scss';
+import './Login.scss';
 import circle from '../assets/circle.png'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,7 +14,7 @@ const initialState = {
   confirmPassword: ''
 };
 
-const Register = () => {
+const Login = () => {
 
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const Register = () => {
   const [loginState, setLoginState] = useState(true);
 
   useEffect(() => {
-    if(localStorage.getItem('chat-app-user')){
+    if (localStorage.getItem('chat-app-user')) {
       navigate('/')
     }
   }, [])
@@ -63,7 +63,6 @@ const Register = () => {
       toast.error(`${data.data.msg}`, toastOptions)
       return
     }
-    console.log(data);
     localStorage.setItem('chat-app-user', JSON.stringify(data.data.user));
     navigate("/set-avatar");
   }
@@ -78,7 +77,7 @@ const Register = () => {
         <input className='form__input' type="text" placeholder='Username' name='userName' value={formState.userName} onChange={changeInputRegister} />
         <input className='form__input' type="password" placeholder='password' name='password' value={formState.password} onChange={changeInputRegister} />
         {!loginState && <input className='form__input' type="password" placeholder='Confirm Password' name='confirmPassword' value={formState.confirmPassword} onChange={changeInputRegister} />}
-        <button className='form__btn' type='submit'>Create User</button>
+        <button className='form__btn' type='submit'>{loginState ? 'Login' : 'Register'}</button>
         <span onClick={() => setLoginState(!loginState)}>{loginState ? 'Create an account' : 'I already have an account LOGIN'}</span>
       </form>
       <ToastContainer />
@@ -86,4 +85,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Login
