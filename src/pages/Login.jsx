@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios';
 import { loginRoute, registerRoute } from '../utils/APIRoutes.js';
-import { toastOptions } from '../utils/toastOpts';
+import { toastOptions } from '../utils/constants';
 
 const initialState = {
   userName: '',

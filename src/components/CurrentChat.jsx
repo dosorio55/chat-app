@@ -8,7 +8,7 @@ import './CurrentChat.scss'
 import Logout from './Logout'
 
 
-const CurrentChat = ({ selectedChat, currentUserId }) => {
+const CurrentChat = ({ selectedChat, currentUserId, socket }) => {
 
   const [messages, setMessages] = useState([])
 
@@ -17,6 +17,16 @@ const CurrentChat = ({ selectedChat, currentUserId }) => {
       from: currentUserId,
       to: selectedChat._id,
       message: msg
+    });
+
+    socket.current.emit('send-msg', {
+      to: selectedChat._id,
+      from: currentUserId,
+      message: msg
+    });
+
+    setMessages(prevMsg => {
+      return [...prevMsg, { fromSelf: true, message: msg }]
     })
   }
 
@@ -31,9 +41,7 @@ const CurrentChat = ({ selectedChat, currentUserId }) => {
 
     }
     getAllMessages();
-    console.log(messages);
   }, [selectedChat._id])
-
 
   return (
     <div className='current-chat'>
@@ -42,7 +50,7 @@ const CurrentChat = ({ selectedChat, currentUserId }) => {
           <div className="current-chat__user-details__avatar">
             <img
               src={`data:image/svg+xml;base64,${selectedChat.avatarImage}`}
-              alt=""
+              alt="avatar"
             />
           </div>
           <h3>{selectedChat.username}</h3>
