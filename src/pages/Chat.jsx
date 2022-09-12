@@ -18,6 +18,7 @@ const Chat = () => {
   const navigate = useNavigate();
 
   const currentUser = JSON.parse(localStorage.getItem('chat-app-user'));
+
   useEffect(() => {
     if (!currentUser) {
       navigate('/login');
@@ -34,8 +35,6 @@ const Chat = () => {
     getAllContacts();
 
   }, [navigate]);
-
-  console.log(selectedChat);
 
   return (
     <>
@@ -54,8 +53,8 @@ const Chat = () => {
             <CurrentUser currentUser={currentUser} />
           </div>
           {
-            selectedChat ? <CurrentChat selectedChat={selectedChat}/>
-              : <Welcome username={currentUser.username} />
+            selectedChat ? <CurrentChat selectedChat={selectedChat} currentUserId={currentUser._id} />
+              : <Welcome username={currentUser?.username} />
           }
         </div>
       </div>

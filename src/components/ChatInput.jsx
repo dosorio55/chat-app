@@ -1,8 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { BsEmojiSmileFill } from "react-icons/bs";
+import { IoMdSend } from "react-icons/io";
+import Picker from 'emoji-picker-react'
+import './ChatInput.scss'
 
-const ChatInput = () => {
+const ChatInput = ({handleSendMsg}) => {
+
+  const [emojiPicker, setEmojiPicker] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleEmojiPicker = () => {
+    setEmojiPicker(prevState => !prevState)
+  }
+
+  const handleEmojiClick = (event, emojiObject) => {
+    let messageVar = message;
+    messageVar += emojiObject.emoji;
+    setMessage(messageVar);
+  };
+
+  const handleChangeInput = (event) => {
+    if (emojiPicker === true) {
+      setEmojiPicker(false);
+    }
+    setMessage(event.target.value);
+  };
+
+  const sendMsg = (event) => {
+    event.preventDefault();
+    if (message.trim().length > 0) {
+      handleSendMsg(message.trim())
+      setMessage('')
+    }
+  }
+
   return (
-    <div>ChatInput</div>
+    <div className='chat-input-container'>
+      <div className="emoji">
+        <BsEmojiSmileFill onClick={handleEmojiPicker} />
+        {emojiPicker && <Picker onEmojiClick={handleEmojiClick} />}
+      </div>
+      <form onSubmit={sendMsg} className='input-container'>
+        <input type="text" placeholder='Type your message here' value={message} onChange={handleChangeInput} />
+        <button className='submit'>
+          <IoMdSend />
+        </button>
+      </form>
+    </div>
   )
 }
 

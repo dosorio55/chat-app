@@ -63,6 +63,7 @@ const Login = () => {
       toast.error(`${data.data.msg}`, toastOptions)
       return
     }
+    console.log(data.data.user);
     localStorage.setItem('chat-app-user', JSON.stringify(data.data.user));
     navigate("/set-avatar");
   }
