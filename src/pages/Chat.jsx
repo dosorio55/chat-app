@@ -1,13 +1,15 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Contacts from '../components/Contacts'
-import { getAllContactsRoute } from '../utils/APIRoutes'
+import { getAllContactsRoute, HOST } from '../utils/APIRoutes'
 import circle from '../assets/circle.png'
 import './Chat.scss'
 import CurrentUser from '../components/CurrentUser'
 import Welcome from '../components/Welcome'
 import CurrentChat from '../components/CurrentChat'
+import { io } from 'socket.io-client'
+import { currentUser } from '../utils/constants'
 
 
 const Chat = () => {
@@ -15,9 +17,9 @@ const Chat = () => {
   const [contacts, setContacts] = useState([]);
   const [selectedChat, setSelectedChat] = useState(undefined);
 
+  const socket = useRef();
   const navigate = useNavigate();
 
-  const currentUser = JSON.parse(localStorage.getItem('chat-app-user'));
   useEffect(() => {
     if (!currentUser) {
       navigate('/login');
@@ -35,7 +37,14 @@ const Chat = () => {
 
   }, [navigate]);
 
-  console.log(selectedChat);
+  useEffect(() => {
+    if (currentUser) {
+
+      socket.current = io(HOST)
+      socket.current.emit('add-user', currentUser._id)
+    }
+
+  }, [currentUser])
 
   return (
     <>
@@ -54,8 +63,8 @@ const Chat = () => {
             <CurrentUser currentUser={currentUser} />
           </div>
           {
-            selectedChat ? <CurrentChat selectedChat={selectedChat}/>
-              : <Welcome username={currentUser.username} />
+            selectedChat ? <CurrentChat selectedChat={selectedChat} currentUserId={currentUser._id} socket={socket} />
+              : <Welcome username={currentUser?.username} />
           }
         </div>
       </div>

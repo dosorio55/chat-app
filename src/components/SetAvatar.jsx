@@ -7,7 +7,7 @@ import loader from '../assets/loader.gif'
 import image from '../assets/image.png'
 import './setAvatar.scss'
 import { toast } from 'react-toastify';
-import { toastOptions } from '../utils/toastOpts.js';
+import { toastOptions } from '../utils/constants';
 
 
 const SetAvatar = () => {

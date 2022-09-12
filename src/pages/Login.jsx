@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios';
 import { loginRoute, registerRoute } from '../utils/APIRoutes.js';
-import { toastOptions } from '../utils/toastOpts';
+import { toastOptions } from '../utils/constants';
 
 const initialState = {
   userName: '',
@@ -63,6 +63,7 @@ const Login = () => {
       toast.error(`${data.data.msg}`, toastOptions)
       return
     }
+    console.log(data.data.user);
     localStorage.setItem('chat-app-user', JSON.stringify(data.data.user));
     navigate("/set-avatar");
   }
