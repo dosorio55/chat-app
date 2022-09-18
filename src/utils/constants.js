@@ -6,4 +6,7 @@ export const toastOptions = {
   theme: "dark",
 };
 
-export const currentUser = JSON.parse(localStorage.getItem('chat-app-user'));
+// export const currentUser = async () => {
+//   const chatUser = await JSON.parse(localStorage.getItem('chat-app-user'));
+//   return chatUser
+// } 

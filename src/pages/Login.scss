@@ -17,8 +17,9 @@
     gap: 2rem;
     background-color: var(--primary-color-500);
     border-radius: .5rem;
-    // min-width: 700px;
-    padding: 3rem 5rem;
+    max-width: 550px;
+    width: calc(100% - 3rem);
+    padding: 3rem 2rem;
 
     &__img {
         height: 5rem;
@@ -45,20 +46,40 @@
         }
     }
 
+    &__submit {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+        flex-wrap: wrap;
+
+        & span {
+            padding: 1rem .5rem;
+            color: white;
+            cursor: pointer;
+        }
+    }
+
     &__btn {
         background-color: var(--secondary-color-700);
+        border: 1x solid black;
         color: white;
         padding: 1rem 2rem;
+        // width: 100%;
         border: none;
         font-weight: bold;
         cursor: pointer;
         border-radius: 0.4rem;
         font-size: 1rem;
         text-transform: uppercase;
-        
-        &:hover {
-            background-color: var(--secondary-color-500);
-        }
 
+        &:hover {
+            outline: none;
+            background-color: var(--white-color);
+            color: var(--secondary-color-700);
+            border: 1px solid var(--secondary-color-700);
+        }
     }
 }
+
+@media screen and (min-width: 720px) and (max-width: 1080px) {}

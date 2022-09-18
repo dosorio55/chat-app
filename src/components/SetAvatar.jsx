@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { apiAvatar, setAvatarRoute } from '../utils/APIRoutes.js';
 import { Buffer } from "buffer";
 import loader from '../assets/loader.gif'
-import image from '../assets/image.png'
 import './setAvatar.scss'
 import { toast } from 'react-toastify';
 import { toastOptions } from '../utils/constants';
