@@ -12,7 +12,7 @@
     &__chat {
         display: grid;
         grid-template-columns: 25% 75%;
-        min-height: 95vh;
+        height: 95vh;
         width: 85vw;
         border-radius: 10px;
         background-color: var(--primary-color-500);
