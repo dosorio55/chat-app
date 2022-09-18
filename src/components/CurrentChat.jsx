@@ -80,7 +80,6 @@ const CurrentChat = ({ selectedChat, currentUserId, socket }) => {
           </div>
           <h3>{selectedChat.username}</h3>
         </div>
-        <Logout />
       </div>
       <div className="chat-messages">
         {messages.map((message, index) =>

@@ -36,6 +36,7 @@ const Login = () => {
   const handleRegisterForm = async (event) => {
     event.preventDefault();
     const { userName, password, confirmPassword } = formState;
+    console.log(userName.length <= 4);
     if (password.trim().length === 0 || userName.trim().length === 0) {
       toast.error("You have to fill all the fields", toastOptions)
       return
@@ -45,7 +46,7 @@ const Login = () => {
     } else if (!loginState && password !== confirmPassword) {
       toast.error("Both passwords should be equal", toastOptions)
       return
-    } else if (userName.length <= 4) {
+    } else if (userName.length < 4) {
       toast.error("Username should have 4 or more characters", toastOptions)
       return
     }
@@ -77,9 +78,13 @@ const Login = () => {
         <p>{loginState ? 'Login' : 'Register'}</p>
         <input className='form__input' type="text" placeholder='Username' name='userName' value={formState.userName} onChange={changeInputRegister} />
         <input className='form__input' type="password" placeholder='password' name='password' value={formState.password} onChange={changeInputRegister} />
-        {!loginState && <input className='form__input' type="password" placeholder='Confirm Password' name='confirmPassword' value={formState.confirmPassword} onChange={changeInputRegister} />}
-        <button className='form__btn' type='submit'>{loginState ? 'Login' : 'Register'}</button>
-        <span onClick={() => setLoginState(!loginState)}>{loginState ? 'Create an account' : 'I already have an account LOGIN'}</span>
+        {!loginState &&
+          <input className='form__input' type="password" placeholder='Confirm Password' name='confirmPassword' value={formState.confirmPassword}
+            onChange={changeInputRegister} />}
+        <div className='form__submit'>
+          <span onClick={() => setLoginState(!loginState)}>{loginState ? 'Create an account' : 'I already have an account LOGIN'}</span>
+          <button className='form__btn' type='submit'>{loginState ? 'Login' : 'Register'}</button>
+        </div>
       </form>
       <ToastContainer />
     </div>

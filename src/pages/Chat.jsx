@@ -9,7 +9,7 @@ import CurrentUser from '../components/CurrentUser'
 import Welcome from '../components/Welcome'
 import CurrentChat from '../components/CurrentChat'
 import { io } from 'socket.io-client'
-import { currentUser } from '../utils/constants'
+import Logout from '../components/Logout'
 
 
 const Chat = () => {
@@ -19,6 +19,8 @@ const Chat = () => {
 
   const socket = useRef();
   const navigate = useNavigate();
+
+  const currentUser = JSON.parse(localStorage.getItem('chat-app-user'));
 
   useEffect(() => {
     if (!currentUser) {
@@ -48,8 +50,10 @@ const Chat = () => {
 
   return (
     <>
+
       <div className='chat-container'>
         <div className="chat-container__chat">
+        <Logout />
           <div className='chat-container__sidebar'>
             <div className="chat-container__logo">
               <img src={circle} alt="logo" />
