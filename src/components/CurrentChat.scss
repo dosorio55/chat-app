@@ -1,4 +1,6 @@
 .current-chat {
+    flex: 8;
+
     display: grid;
     grid-template-rows: 10% 80% 10%;
     gap: 0.1rem;

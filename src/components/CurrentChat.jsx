@@ -61,9 +61,7 @@ const CurrentChat = ({ selectedChat, currentUserId, socket }) => {
         from: currentUserId,
         to: selectedChat._id
       })
-
       setMessages(data.data)
-
     }
     getAllMessages();
   }, [selectedChat._id])
