@@ -5,8 +5,6 @@ import { useEffect } from 'react'
 import { getMessagesRoute, sendMessageRoute } from '../utils/APIRoutes'
 import ChatInput from './ChatInput'
 import './CurrentChat.scss'
-import Logout from './Logout'
-
 
 const CurrentChat = ({ selectedChat, currentUserId, socket }) => {
 
@@ -61,9 +59,7 @@ const CurrentChat = ({ selectedChat, currentUserId, socket }) => {
         from: currentUserId,
         to: selectedChat._id
       })
-
       setMessages(data.data)
-
     }
     getAllMessages();
   }, [selectedChat._id])
@@ -73,10 +69,7 @@ const CurrentChat = ({ selectedChat, currentUserId, socket }) => {
       <div className="current-chat__header">
         <div className="current-chat__user-details">
           <div className="current-chat__user-details__avatar">
-            <img
-              src={`data:image/svg+xml;base64,${selectedChat.avatarImage}`}
-              alt="avatar"
-            />
+            <img src={`data:image/svg+xml;base64,${selectedChat.avatarImage}`} alt="avatar" />
           </div>
           <h3>{selectedChat.username}</h3>
         </div>
@@ -84,10 +77,7 @@ const CurrentChat = ({ selectedChat, currentUserId, socket }) => {
       <div className="chat-messages">
         {messages.map((message, index) =>
           <div ref={scrollRef} key={index}>
-            <div
-              className={`message ${message.fromSelf ? "sended" : "recieved"
-                }`}
-            >
+            <div className={`message ${message.fromSelf ? "sended" : "recieved"}`}>
               <div className="content ">
                 <p>{message.message}</p>
               </div>

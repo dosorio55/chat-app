@@ -13,7 +13,10 @@ const Contacts = ({ contact, selectedChat, setSelectedChat }) => {
         src={`data:image/svg+xml;base64,${contact.avatarImage}`}
         alt={contact.username}
       />
-      <h3 className="chat-container__username">{contact.username}</h3>
+      <div className="chat-container__info">
+        <h3>{contact.username}</h3>
+        <p>hello</p>
+      </div>
     </div>
   )
 }

@@ -4,7 +4,7 @@
     align-items: center;
     flex-direction: column;
     gap: 3rem;
-    background-color: var(--primary-color-700);
+    background-color: var(--primary-color-500);
     height: 100vh;
     width: 100vw;
 
@@ -14,6 +14,8 @@
 
     &__avatars {
         display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
         gap: 2rem;
 
         &__avatar {
@@ -40,17 +42,20 @@
 
     &__btn {
         background-color: var(--secondary-color-700);
+        border: 1px solid var(--secondary-color-700);
         color: white;
         padding: 1rem 2rem;
-        border: none;
         font-weight: bold;
         cursor: pointer;
         border-radius: 0.4rem;
         font-size: 1rem;
         text-transform: uppercase;
-
+        
         &:hover {
-            background-color: #4e0eff;
+            outline: none;
+            background-color: var(--white-color);
+            color: var(--secondary-color-700);
+            border: 1px solid var(--secondary-color-700);
         }
         
         &:disabled{

@@ -2,7 +2,7 @@
     display: grid;
     align-items: center;
     grid-template-columns: 5% 95%;
-    // background-color: #080420;
+    background-color: white;
     padding: 0 2rem;
 
     @media screen and (min-width: 720px) and (max-width: 1080px) {
@@ -20,17 +20,17 @@
 
     .input-container {
         width: 100%;
-        border-radius: 2rem;
         display: flex;
         align-items: center;
-        gap: 2rem;
+        justify-content: space-between;
         background-color: #ffffff34;
+
+        height: 4rem;
 
         input {
             width: 90%;
             height: 60%;
             background-color: transparent;
-            color: white;
             border: none;
             padding-left: 1rem;
             font-size: 1.2rem;
@@ -46,11 +46,9 @@
 
         button {
             padding: 0.3rem 2rem;
-            border-radius: 2rem;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #9a86f3;
+            justify-content: end;
+            background-color: transparent;
             border: none;
 
             @media screen and (min-width: 720px) and (max-width: 1080px) {
@@ -63,25 +61,27 @@
 
             svg {
                 font-size: 2rem;
-                color: white;
+                color: black;
             }
         }
     }
 }
 
 .emoji {
+    display: flex;
+    justify-content: center;
     position: relative;
 
     svg {
-        font-size: 1.5rem;
-        color: #ffff00c8;
+        font-size: 1.7rem;
+        color: var(--primary-color-200);
         cursor: pointer;
     }
 
     .emoji-picker-react {
         position: absolute;
         top: -350px;
-        box-shadow: 0 5px 10px #9a86f3;
+        box-shadow: 0 5px 10px var(--primary-color-900);
         border-color: #9a86f3;
 
         .emoji-scroll-wrapper::-webkit-scrollbar {
@@ -101,9 +101,7 @@
 
         .emoji-search {
             background-color: transparent;
-            border-color: #9a86f3;
+            border-color: var(--primary-color-200);
         }
-
-
     }
 }

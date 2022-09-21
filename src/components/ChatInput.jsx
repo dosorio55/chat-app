@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BsEmojiSmileFill } from "react-icons/bs";
+import { AiOutlineSmile } from "react-icons/ai";
 import { IoMdSend } from "react-icons/io";
 import Picker from 'emoji-picker-react'
 import './ChatInput.scss'
@@ -37,12 +37,12 @@ const ChatInput = ({handleSendMsg}) => {
   return (
     <div className='chat-input-container'>
       <div className="emoji">
-        <BsEmojiSmileFill onClick={handleEmojiPicker} />
+        <AiOutlineSmile onClick={handleEmojiPicker} />
         {emojiPicker && <Picker onEmojiClick={handleEmojiClick} />}
       </div>
       <form onSubmit={sendMsg} className='input-container'>
         <input type="text" placeholder='Type your message here' value={message} onChange={handleChangeInput} />
-        <button className='submit'>
+        <button type='submit'>
           <IoMdSend />
         </button>
       </form>
