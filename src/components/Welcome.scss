@@ -4,7 +4,8 @@
     align-items: center;
     color: white;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100%;
+    background-color: var(--primary-color-100);
 
     flex: 8;
     img {

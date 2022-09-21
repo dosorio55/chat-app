@@ -11,6 +11,7 @@ import CurrentChat from '../components/CurrentChat';
 import { io } from 'socket.io-client';
 import Logout from '../components/Logout';
 import { GiHamburgerMenu } from 'react-icons/gi'
+import Search from '../components/Search'
 
 const Chat = () => {
 
@@ -55,20 +56,20 @@ const Chat = () => {
       <div className='chat-container'>
         <div className="chat-container__chat">
           <Logout />
-          <GiHamburgerMenu onClick={() => setSidebar(!sidebar)} />
-          {sidebar &&
+          {/* <GiHamburgerMenu onClick={() => setSidebar(!sidebar)} /> */}
             <div className='chat-container__sidebar'>
               <div className="chat-container__logo">
                 <img src={circle} alt="logo" />
                 <h3>MAICHAT</h3>
               </div>
+              <Search />
               <div className='chat-container__contacts'>
                 {contacts.map((contact) =>
                   <Contacts key={contact._id} contact={contact} selectedChat={selectedChat} setSelectedChat={setSelectedChat} />
                 )}
               </div>
               <CurrentUser currentUser={currentUser} />
-            </div>}
+            </div>
           {
             selectedChat ? <CurrentChat selectedChat={selectedChat} currentUserId={currentUser._id} socket={socket} />
               : <Welcome username={currentUser?.username} />

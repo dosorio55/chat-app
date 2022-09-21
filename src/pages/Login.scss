@@ -4,8 +4,7 @@
     align-items: center;
 
     height: 100vh;
-    width: 100vw;
-    background-color: var(--primary-color-700);
+    background-color: var(--primary-color-500);
 
 }
 
@@ -14,12 +13,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
-    background-color: var(--primary-color-500);
+    gap: 1.5rem;
+    background-color: white;
     border-radius: .5rem;
     max-width: 550px;
     width: calc(100% - 3rem);
-    padding: 3rem 2rem;
+    padding: 3rem 3rem;
 
     &__img {
         height: 5rem;
@@ -30,13 +29,13 @@
     }
 
     & h1 {
-        color: var(--white-color);
+        color: #fbb03b;
     }
 
     &__input {
         padding: 1rem;
-        border: 0.1rem solid var(--primary-color-200);
-        border-radius: 0.4rem;
+        border: 1px solid transparent;
+        border-bottom: 1px solid #a7bcff;
         width: 100%;
         font-size: 1rem;
 
@@ -46,32 +45,20 @@
         }
     }
 
-    &__submit {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        align-items: center;
-        flex-wrap: wrap;
-
-        & span {
-            padding: 1rem .5rem;
-            color: white;
-            cursor: pointer;
-        }
-    }
-
     &__btn {
-        background-color: var(--secondary-color-700);
         border: 1x solid black;
-        color: white;
         padding: 1rem 2rem;
-        // width: 100%;
-        border: none;
+        width: 100%;
+
+        background-color: var(--secondary-color-700);
+        border: 1px solid var(--secondary-color-700);
+        color: white;
         font-weight: bold;
         cursor: pointer;
         border-radius: 0.4rem;
         font-size: 1rem;
         text-transform: uppercase;
+        margin-top: 1rem;
 
         &:hover {
             outline: none;

@@ -81,10 +81,10 @@ const Login = () => {
         {!loginState &&
           <input className='form__input' type="password" placeholder='Confirm Password' name='confirmPassword' value={formState.confirmPassword}
             onChange={changeInputRegister} />}
-        <div className='form__submit'>
-          <span onClick={() => setLoginState(!loginState)}>{loginState ? 'Create an account' : 'I already have an account LOGIN'}</span>
-          <button className='form__btn' type='submit'>{loginState ? 'Login' : 'Register'}</button>
-        </div>
+        <button className='form__btn' type='submit'>{loginState ? 'Login' : 'Register'}</button>
+        <span onClick={() => setLoginState(!loginState)}>
+          {loginState ? <p> You don't have an account, Register </p>
+            : 'Do you have an account? Login'}</span>
       </form>
       <ToastContainer />
     </div>
