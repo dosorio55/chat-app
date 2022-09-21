@@ -15,7 +15,7 @@ const Contacts = ({ contact, selectedChat, setSelectedChat }) => {
       />
       <div className="chat-container__info">
         <h3>{contact.username}</h3>
-        <p>hello</p>
+        {/* <p>hello</p> */}
       </div>
     </div>
   )
