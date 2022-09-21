@@ -17,6 +17,7 @@ const Chat = () => {
 
   const [contacts, setContacts] = useState([]);
   const [selectedChat, setSelectedChat] = useState(undefined);
+  const [searchContacts, setSearchContacts] = useState('')
   const [sidebar, setSidebar] = useState(false)
 
   const socket = useRef();
@@ -48,28 +49,29 @@ const Chat = () => {
       socket.current.emit('add-user', currentUser._id)
     }
 
-  }, [currentUser])
-
+  }, [currentUser]);
+  
+  const filteredUsers = contacts.filter(contact => contact.username.toLowerCase().includes(searchContacts.toLowerCase()));
+  
   return (
     <>
-
       <div className='chat-container'>
         <div className="chat-container__chat">
           <Logout />
           {/* <GiHamburgerMenu onClick={() => setSidebar(!sidebar)} /> */}
-            <div className='chat-container__sidebar'>
-              <div className="chat-container__logo">
-                <img src={circle} alt="logo" />
-                <h3>MAICHAT</h3>
-              </div>
-              <Search />
-              <div className='chat-container__contacts'>
-                {contacts.map((contact) =>
-                  <Contacts key={contact._id} contact={contact} selectedChat={selectedChat} setSelectedChat={setSelectedChat} />
-                )}
-              </div>
-              <CurrentUser currentUser={currentUser} />
+          <div className='chat-container__sidebar'>
+            <div className="chat-container__logo">
+              <img src={circle} alt="logo" />
+              <h3>MAICHAT</h3>
             </div>
+            <Search searchContacts={searchContacts} setSearchContacts={setSearchContacts}/>
+            <div className='chat-container__contacts'>
+              {filteredUsers.map((contact) =>
+                <Contacts key={contact._id} contact={contact} selectedChat={selectedChat} setSelectedChat={setSelectedChat} />
+              )}
+            </div>
+            <CurrentUser currentUser={currentUser} />
+          </div>
           {
             selectedChat ? <CurrentChat selectedChat={selectedChat} currentUserId={currentUser._id} socket={socket} />
               : <Welcome username={currentUser?.username} />

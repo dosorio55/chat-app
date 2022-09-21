@@ -70,17 +70,15 @@
         align-items: center;
         border-bottom: 1px solid gray;
 
-        &__form {
-
-            padding: 10px;
-
-            & input {
-                background: transparent;
-                border: none;
-                color: white;
-                outline: none;
-            }
+        & input {
+            padding: .8rem;
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: white;
+            outline: none;
         }
+
     }
 
     &__contacts {
