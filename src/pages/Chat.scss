@@ -81,10 +81,17 @@
 
     }
 
+    &__loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    
     &__contacts {
         display: flex;
         flex-direction: column;
-        height: 70vh;
+        height: 100%;
         padding-top: .5rem;
 
         cursor: pointer;
