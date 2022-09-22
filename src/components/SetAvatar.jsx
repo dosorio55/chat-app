@@ -39,10 +39,8 @@ const SetAvatar = () => {
         navigate('/chat')
       }
     } else {
-
       navigate("/login")
     }
-
   }, [navigate]);
 
   const setProfilePicture = async () => {
@@ -73,12 +71,6 @@ const SetAvatar = () => {
       <div className='select-avatar__title'>
         <h1>Select your avatar...</h1>
       </div>
-      {/* <div className='select-avatar__avatars__avatar'>
-      <img className='image' src={image} alt="avatar" />
-
-      </div> */}
-
-
       <div className='select-avatar__avatars'>
         {loading ? <img src={loader} alt="loader" />
           : avatars.map((avatar, index) =>
