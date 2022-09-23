@@ -56,26 +56,18 @@ const Chat = () => {
 
   const filteredUsers = contacts.filter(contact => contact.username.toLowerCase().includes(searchContacts.toLowerCase()));
 
-  const [windowSize, setWindowSize] = useState(getWindowSize());
+  const [windowWidth, setWindowWidth] = useState();
 
   useEffect(() => {
-    function handleWindowResize() {
-      setWindowSize(getWindowSize());
-    }
 
-    window.addEventListener('resize', handleWindowResize);
+    window.addEventListener('resize', () => setWindowWidth(window.innerWidth));
 
     return () => {
-      window.removeEventListener('resize', handleWindowResize);
+      window.removeEventListener('resize', () => setWindowWidth(window.innerWidth));
     };
   }, []);
 
-  function getWindowSize() {
-    const {innerWidth, innerHeight} = window;
-    return {innerWidth, innerHeight};
-  }
-
-  console.log(window.innerWidth);
+  console.log(windowSize);
 
   return (
     <>
