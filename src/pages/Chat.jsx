@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Contacts from '../components/Contacts'
 import { getAllContactsRoute, HOST } from '../utils/APIRoutes'
@@ -19,7 +19,7 @@ const Chat = () => {
   const [selectedChat, setSelectedChat] = useState(undefined);
   const [searchContacts, setSearchContacts] = useState('');
   const [loading, setLoading] = useState(true)
-  const [sidebar, setSidebar] = useState(false)
+  const [sidebar, setSidebar] = useState(true)
 
   const socket = useRef();
   const navigate = useNavigate();
@@ -55,6 +55,27 @@ const Chat = () => {
   }, [currentUser]);
 
   const filteredUsers = contacts.filter(contact => contact.username.toLowerCase().includes(searchContacts.toLowerCase()));
+
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+
+  function getWindowSize() {
+    const {innerWidth, innerHeight} = window;
+    return {innerWidth, innerHeight};
+  }
+
+  console.log(window.innerWidth);
 
   return (
     <>

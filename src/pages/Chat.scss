@@ -1,4 +1,5 @@
 .chat-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,6 +44,31 @@
         border-right: solid 2px black;
 
         background: var(--primary-color-700);
+
+        @media screen and (max-width: 940px) {
+
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 45%;
+        }
+
+        @media screen and (max-width: 580px) {
+
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 60%;
+        }
+
+        @media screen and (max-width: 440px) {
+
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 70%;
+        }
+
     }
 
     &__logo {
@@ -87,7 +113,7 @@
         justify-content: center;
         height: 100%;
     }
-    
+
     &__contacts {
         display: flex;
         flex-direction: column;
@@ -128,7 +154,7 @@
         &:hover {
             background-color: var(--primary-color-900);
         }
-        
+
         &--selected {
             background-color: var(--primary-color-900);
         }
