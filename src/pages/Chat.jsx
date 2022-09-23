@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Contacts from '../components/Contacts'
 import { getAllContactsRoute, HOST } from '../utils/APIRoutes'
@@ -19,7 +19,7 @@ const Chat = () => {
   const [selectedChat, setSelectedChat] = useState(undefined);
   const [searchContacts, setSearchContacts] = useState('');
   const [loading, setLoading] = useState(true)
-  const [sidebar, setSidebar] = useState(false)
+  const [sidebar, setSidebar] = useState(true)
 
   const socket = useRef();
   const navigate = useNavigate();
@@ -47,21 +47,31 @@ const Chat = () => {
 
   useEffect(() => {
     if (currentUser) {
-
       socket.current = io(HOST)
       socket.current.emit('add-user', currentUser._id)
     }
-
-  }, [currentUser]);
+  }, []);
 
   const filteredUsers = contacts.filter(contact => contact.username.toLowerCase().includes(searchContacts.toLowerCase()));
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+
+    window.addEventListener('resize', () => setWindowWidth(window.innerWidth));
+
+    return () => {
+      window.removeEventListener('resize', () => setWindowWidth(window.innerWidth));
+    };
+  }, []);
+
+  console.log(windowWidth);
 
   return (
     <>
       <div className='chat-container'>
         <div className="chat-container__chat">
           <Logout />
-          {/* <GiHamburgerMenu onClick={() => setSidebar(!sidebar)} /> */}
           {sidebar &&
             <div className='chat-container__sidebar'>
               <div className="chat-container__logo">

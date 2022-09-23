@@ -14,6 +14,8 @@ const initialState = {
   confirmPassword: ''
 };
 
+console.log('beeing rerender');
+
 const Login = () => {
 
   const navigate = useNavigate();
