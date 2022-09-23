@@ -47,16 +47,14 @@ const Chat = () => {
 
   useEffect(() => {
     if (currentUser) {
-
       socket.current = io(HOST)
       socket.current.emit('add-user', currentUser._id)
     }
-
-  }, [currentUser]);
+  }, []);
 
   const filteredUsers = contacts.filter(contact => contact.username.toLowerCase().includes(searchContacts.toLowerCase()));
 
-  const [windowWidth, setWindowWidth] = useState();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
 
@@ -67,14 +65,13 @@ const Chat = () => {
     };
   }, []);
 
-  console.log(windowSize);
+  console.log(windowWidth);
 
   return (
     <>
       <div className='chat-container'>
         <div className="chat-container__chat">
           <Logout />
-          {/* <GiHamburgerMenu onClick={() => setSidebar(!sidebar)} /> */}
           {sidebar &&
             <div className='chat-container__sidebar'>
               <div className="chat-container__logo">

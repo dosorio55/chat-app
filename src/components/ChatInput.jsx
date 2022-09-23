@@ -4,7 +4,7 @@ import { IoMdSend } from "react-icons/io";
 import Picker from 'emoji-picker-react'
 import './ChatInput.scss'
 
-const ChatInput = ({handleSendMsg}) => {
+const ChatInput = ({ handleSendMsg }) => {
 
   const [emojiPicker, setEmojiPicker] = useState(false);
   const [message, setMessage] = useState('');
@@ -31,6 +31,9 @@ const ChatInput = ({handleSendMsg}) => {
     if (message.trim().length > 0) {
       handleSendMsg(message.trim())
       setMessage('')
+    }
+    if (emojiPicker === true) {
+      setEmojiPicker(false);
     }
   }
 
