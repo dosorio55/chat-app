@@ -3,7 +3,7 @@ import welcome from '../assets/welcome.gif';
 import './Welcome.scss';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
-const Welcome = ({ username, sidebar, setSidebar }) => {
+const Welcome = ({ username, setSidebar }) => {
     return (
         <div className='welcome'>
             <div>

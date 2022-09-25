@@ -2,11 +2,12 @@ import axios from 'axios'
 import React, { useRef } from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { GiHamburgerMenu } from 'react-icons/gi'
 import { getMessagesRoute, sendMessageRoute } from '../utils/APIRoutes'
 import ChatInput from './ChatInput'
 import './CurrentChat.scss'
 
-const CurrentChat = ({ selectedChat, currentUserId, socket }) => {
+const CurrentChat = ({ selectedChat, currentUserId, socket, setSidebar }) => {
 
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null)
@@ -68,6 +69,9 @@ const CurrentChat = ({ selectedChat, currentUserId, socket }) => {
     <div className='current-chat'>
       <div className="current-chat__header">
         <div className="current-chat__user-details">
+        <div>
+                <GiHamburgerMenu onClick={() => setSidebar(prevState => !prevState)} />
+            </div>
           <div className="current-chat__user-details__avatar">
             <img src={`data:image/svg+xml;base64,${selectedChat.avatarImage}`} alt="avatar" />
           </div>

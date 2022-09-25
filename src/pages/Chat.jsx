@@ -52,8 +52,6 @@ const Chat = () => {
     }
   }, []);
 
-  const filteredUsers = contacts.filter(contact => contact.username.toLowerCase().includes(searchContacts.toLowerCase()));
-
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -65,7 +63,16 @@ const Chat = () => {
     };
   }, []);
 
-  console.log(windowWidth);
+  useEffect(() => {
+    if (windowWidth > 940 && sidebar === false) { setSidebar(true) }
+  }, [windowWidth])
+
+  const filteredUsers = contacts.filter(contact => contact.username.toLowerCase().includes(searchContacts.toLowerCase()));
+
+  const handleSelectedChat = (selectedContact) => {
+    setSelectedChat(selectedContact);
+    if (windowWidth <= 940) { setSidebar(false) }
+  }
 
   return (
     <>
@@ -84,11 +91,13 @@ const Chat = () => {
                   <img src={contactsLoaders} alt="loader" />
                 </div>
                 : <div className='chat-container__contacts'>
-                  {filteredUsers.map((contact) => <Contacts key={contact._id} contact={contact} selectedChat={selectedChat} setSelectedChat={setSelectedChat} />)}
+                  {filteredUsers.map((contact) =>
+                    <Contacts key={contact._id} contact={contact} selectedChat={selectedChat}
+                      handleSelectedChat={handleSelectedChat} setSidebar={setSidebar} windowWidth={windowWidth} />)}
                 </div>}
               <CurrentUser currentUser={currentUser} />
             </div>}
-          {selectedChat ? <CurrentChat selectedChat={selectedChat} currentUserId={currentUser._id} socket={socket} />
+          {selectedChat ? <CurrentChat selectedChat={selectedChat} currentUserId={currentUser._id} socket={socket} setSidebar={setSidebar} />
             : <Welcome username={currentUser?.username} sidebar={sidebar} setSidebar={setSidebar} />}
         </div>
       </div>

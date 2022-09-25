@@ -1,10 +1,8 @@
 import React from 'react'
 
-const Contacts = ({ contact, selectedChat, setSelectedChat }) => {
+const Contacts = ({ contact, selectedChat, handleSelectedChat }) => {
 
-  const handleSelected = () => {
-    setSelectedChat(contact)
-  }
+  const handleSelected = () => handleSelectedChat(contact);
 
   return (
     <div onClick={handleSelected}
