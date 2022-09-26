@@ -1,15 +1,19 @@
 import React from 'react';
 import welcome from '../assets/welcome.gif';
 import './Welcome.scss';
-import { GiHamburgerMenu } from 'react-icons/gi';
+import { AiFillStepBackward } from 'react-icons/ai';
+import { FiMenu } from 'react-icons/fi';
+import Logout from './Logout';
 
-const Welcome = ({ username, setSidebar }) => {
+const Welcome = ({ username, handleSidebar, sidebar }) => {
     return (
         <div className='welcome'>
-            <div>
-                <GiHamburgerMenu onClick={() => setSidebar(prevState => !prevState)} />
+            <div className='welcome__header'>
+                {sidebar ? <AiFillStepBackward onClick={handleSidebar} />
+                    : <FiMenu onClick={handleSidebar} />}
+            <Logout />
             </div>
-            <div>
+            <div className='welcome__logo'>
                 <img src={welcome} alt="welcome" />
                 <h1>
                     Welcome, <span>{username}!</span>

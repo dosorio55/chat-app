@@ -1,23 +1,14 @@
 .current-chat {
     flex: 8;
 
-    // display: grid;
-    // grid-template-rows: 10% 80% 10%;
-    // gap: 0.1rem;
-
-    // @media screen and (min-width: 720px) and (max-width: 1080px) {
-    //     grid-template-rows: 15% 70% 15%;
-    // }
-
     &__header {
         height: 4rem;
-        padding: 2rem;
 
         background-color: var(--primary-color-500);
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 2rem;
+        padding: 0 1rem;
     }
 
     &__user-details {
@@ -26,11 +17,22 @@
         gap: 1rem;
 
         & img {
-            height: 3rem;
+            height: 2.3rem;
         }
 
         h3 {
             color: white;
+        }
+
+        & svg {
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.1);
+                transition: all 0.2s;
+            }
         }
     }
 }

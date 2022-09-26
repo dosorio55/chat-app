@@ -1,18 +1,42 @@
 .welcome {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    flex-direction: column;
     min-height: 100%;
     background-color: var(--primary-color-500);
 
     flex: 8;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 4rem;
+        padding: 0 1rem;
+
+        & svg {
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.1);
+                transition: all 0.2s;
+            }
+        }
+    }
+
     img {
         height: 20rem;
     }
 
     span {
         color: var(--secondary-color-700);
+    }
+
+    &__logo {
+        display: flex;
+        height: calc(100% - 4rem);
+        justify-content: center;
+        align-items: center;
+        color: white;
+        flex-direction: column;
     }
 }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Contacts from '../components/Contacts'
 import { getAllContactsRoute, HOST } from '../utils/APIRoutes'
@@ -9,7 +9,6 @@ import CurrentUser from '../components/CurrentUser';
 import Welcome from '../components/Welcome';
 import CurrentChat from '../components/CurrentChat';
 import { io } from 'socket.io-client';
-import Logout from '../components/Logout';
 import Search from '../components/Search'
 import contactsLoaders from '../assets/contactsLoaders.gif'
 
@@ -72,13 +71,14 @@ const Chat = () => {
   const handleSelectedChat = (selectedContact) => {
     setSelectedChat(selectedContact);
     if (windowWidth <= 940) { setSidebar(false) }
-  }
+  };
+
+  const handleSidebar = () => setSidebar(prevState => !prevState);
 
   return (
     <>
       <div className='chat-container'>
         <div className="chat-container__chat">
-          <Logout />
           {sidebar &&
             <div className='chat-container__sidebar'>
               <div className="chat-container__logo">
@@ -96,9 +96,13 @@ const Chat = () => {
                       handleSelectedChat={handleSelectedChat} setSidebar={setSidebar} windowWidth={windowWidth} />)}
                 </div>}
               <CurrentUser currentUser={currentUser} />
+
             </div>}
-          {selectedChat ? <CurrentChat selectedChat={selectedChat} currentUserId={currentUser._id} socket={socket} setSidebar={setSidebar} />
-            : <Welcome username={currentUser?.username} sidebar={sidebar} setSidebar={setSidebar} />}
+          {selectedChat ?
+            <CurrentChat selectedChat={selectedChat} currentUserId={currentUser._id}
+              socket={socket} setSidebar={setSidebar} sidebar={sidebar} />
+            : <Welcome username={currentUser?.username} sidebar={sidebar}
+              handleSidebar={handleSidebar} />}
         </div>
       </div>
     </>
