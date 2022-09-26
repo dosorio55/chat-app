@@ -20,9 +20,7 @@ const ChatInput = ({ handleSendMsg }) => {
   };
 
   const handleChangeInput = (event) => {
-    if (emojiPicker === true) {
-      setEmojiPicker(false);
-    }
+    if (emojiPicker === true) { setEmojiPicker(false) }
     setMessage(event.target.value);
   };
 
@@ -44,7 +42,8 @@ const ChatInput = ({ handleSendMsg }) => {
         {emojiPicker && <Picker onEmojiClick={handleEmojiClick} />}
       </div>
       <form onSubmit={sendMsg} className='input-container'>
-        <input type="text" placeholder='Type your message here' value={message} onChange={handleChangeInput} />
+        <input type="text" placeholder='Type your message here' value={message}
+          onFocus={() => setEmojiPicker(false)} onChange={handleChangeInput} />
         <button type='submit'>
           <IoMdSend />
         </button>

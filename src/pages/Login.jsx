@@ -14,7 +14,6 @@ const initialState = {
   confirmPassword: ''
 };
 
-console.log('beeing rerender');
 
 const Login = () => {
 
@@ -38,7 +37,6 @@ const Login = () => {
   const handleRegisterForm = async (event) => {
     event.preventDefault();
     const { userName, password, confirmPassword } = formState;
-    console.log(userName.length <= 4);
     if (password.trim().length === 0 || userName.trim().length === 0) {
       toast.error("You have to fill all the fields", toastOptions)
       return
@@ -66,7 +64,6 @@ const Login = () => {
       toast.error(`${data.data.msg}`, toastOptions)
       return
     }
-    console.log(data.data.user);
     localStorage.setItem('chat-app-user', JSON.stringify(data.data.user));
     navigate("/set-avatar");
   }

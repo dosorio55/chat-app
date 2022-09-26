@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+const capitalize = string => string[0].toUpperCase() + string.slice(1);
 
 const Contacts = ({ contact, selectedChat, handleSelectedChat }) => {
 
@@ -12,8 +14,7 @@ const Contacts = ({ contact, selectedChat, handleSelectedChat }) => {
         alt={contact.username}
       />
       <div className="chat-container__info">
-        <h3>{contact.username}</h3>
-        {/* <p>hello</p> */}
+        <h3>{capitalize(contact.username)}</h3>
       </div>
     </div>
   )
