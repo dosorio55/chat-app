@@ -4,10 +4,10 @@
     grid-template-columns: 5% 95%;
     background-color: white;
     padding: 0 2rem;
-
-    @media screen and (min-width: 720px) and (max-width: 1080px) {
+    
+    @media screen and (max-width: 940px) {
         padding: 0 1rem;
-        gap: 1rem;
+        
     }
 
     .button-container {
@@ -45,14 +45,12 @@
         }
 
         button {
-            padding: 0.3rem 2rem;
             display: flex;
             justify-content: end;
             background-color: transparent;
             border: none;
 
             @media screen and (min-width: 720px) and (max-width: 1080px) {
-                padding: 0.3rem 1rem;
 
                 svg {
                     font-size: 1rem;
