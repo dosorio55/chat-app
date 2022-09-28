@@ -21,6 +21,7 @@ const Login = () => {
 
   const [formState, setFormState] = useState(initialState);
   const [loginState, setLoginState] = useState(true);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (localStorage.getItem('chat-app-user')) {
@@ -36,18 +37,23 @@ const Login = () => {
   /* REGISTER FORM POST */
   const handleRegisterForm = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const { userName, password, confirmPassword } = formState;
     if (password.trim().length === 0 || userName.trim().length === 0) {
       toast.error("You have to fill all the fields", toastOptions)
+      setLoading(false);
       return
     } else if (password.length < 6) {
       toast.error("Password should have 6 or more characters", toastOptions)
+      setLoading(false);
       return
     } else if (!loginState && password !== confirmPassword) {
       toast.error("Both passwords should be equal", toastOptions)
+      setLoading(false);
       return
     } else if (userName.length < 4) {
       toast.error("Username should have 4 or more characters", toastOptions)
+      setLoading(false);
       return
     }
 
@@ -62,11 +68,23 @@ const Login = () => {
     }
     if (data.data.status !== 201) {
       toast.error(`${data.data.msg}`, toastOptions)
+      setLoading(false);
       return
     }
     localStorage.setItem('chat-app-user', JSON.stringify(data.data.user));
     navigate("/set-avatar");
   }
+
+  const buttonState = () => {
+    if (loginState && !loading) {
+      return 'login'
+    } else if (!loginState && !loading) {
+      return 'register'
+    } else if (loading) {
+      return 'loading...'
+    }
+  };
+
   return (
     <div className="formContainer">
       <form onSubmit={handleRegisterForm} className='form'>
@@ -80,7 +98,7 @@ const Login = () => {
         {!loginState &&
           <input className='form__input' type="password" placeholder='Confirm Password' name='confirmPassword' value={formState.confirmPassword}
             onChange={changeInputRegister} />}
-        <button className='form__btn' type='submit'>{loginState ? 'Login' : 'Register'}</button>
+        <button disabled={loading} className='form__btn' type='submit'>{buttonState()}</button>
         <div className='form__text' onClick={() => setLoginState(!loginState)}>
           {loginState ? <p> You don't have an account, <span>Register</span> </p>
             : <p>Do you have an account? <span>Login</span></p>}
