@@ -58,12 +58,18 @@
         font-size: 1rem;
         text-transform: uppercase;
         margin-top: 1rem;
-
-        &:hover {
+        
+        &:hover:not([disabled]) {
             outline: none;
             background-color: var(--white-color);
             color: var(--secondary-color-700);
             border: 1px solid var(--secondary-color-700);
+        }
+        
+        &:disabled {
+            border: 1px solid transparent;
+            background: rgb(199, 199, 199);
+            cursor: wait;
         }
 
     }
