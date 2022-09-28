@@ -37,19 +37,23 @@ const Login = () => {
   /* REGISTER FORM POST */
   const handleRegisterForm = async (event) => {
     event.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const { userName, password, confirmPassword } = formState;
     if (password.trim().length === 0 || userName.trim().length === 0) {
       toast.error("You have to fill all the fields", toastOptions)
+      setLoading(false);
       return
     } else if (password.length < 6) {
       toast.error("Password should have 6 or more characters", toastOptions)
+      setLoading(false);
       return
     } else if (!loginState && password !== confirmPassword) {
       toast.error("Both passwords should be equal", toastOptions)
+      setLoading(false);
       return
     } else if (userName.length < 4) {
       toast.error("Username should have 4 or more characters", toastOptions)
+      setLoading(false);
       return
     }
 
@@ -64,6 +68,7 @@ const Login = () => {
     }
     if (data.data.status !== 201) {
       toast.error(`${data.data.msg}`, toastOptions)
+      setLoading(false);
       return
     }
     localStorage.setItem('chat-app-user', JSON.stringify(data.data.user));
