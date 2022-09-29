@@ -9,8 +9,8 @@ import { loginRoute, registerRoute } from '../utils/APIRoutes.js';
 import { toastOptions } from '../utils/constants';
 
 const initialState = {
-  userName: '',
-  password: '',
+  userName: 'leanejoye',
+  password: '1234567',
   confirmPassword: ''
 };
 
